@@ -1,80 +1,30 @@
 # Next.js + Tailwind CSS + Shopify Starter
 
-<div align="center">
-<img src="https://github.com/btahir/next-shopify-starter/blob/main/public/images/demo-store.gif">
-<p align="center">
-  <a href="https://doggystickers.xyz/">Live Demo</a> •
-  <a href="https://nextails.com/">See more starters</a> •
-  <a href="https://twitter.com/deepwhitman">Follow me on Twitter</a>
-</p>
-</div>
+フロントエンドにNext.js + Tailwind CSSを使用し、Shopify Storefront APIを利用してShopifyバックエンドと通信します。完全に機能するオンラインストアです。実際に動作するデモは[こちら](https://doggystickers.xyz/ "Shopify store")からご覧いただけます。
 
-This is a fully functional eCommerce store that uses Next.js + Tailwind CSS in the front end and leverages the Shopify Storefront API to interact with your Shopify backend. You can see a Live Demo [here](https://doggystickers.xyz/ "Shopify store").
+GraphQLを使ってShopifyのデータを照会し、カートの情報をlocalStorageに保存してユーザーのセッションを保持します。最後に、Shopify Checkoutを使用してユーザーが商品を購入できます。
 
-We use GraphQL to query our Shopify data and store the cart information in localStorage to persist user session. Finally - we use Shopify Checkout to let the user
-purchase the items. You can see this play out in the example store. Yes - the store is functional and you can buy the stickers. :smiley:
-
-## High Performance
-
-<table align="center">
-  <thead>
-    <tr>
-      <td>Desktop</td>
-      <td>Mobile</td>
-    <tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td valign="top"><img width="300" height="300" src="https://github.com/btahir/next-shopify-starter/blob/main/public/images/desktop-lighthouse.png"/></td>
-    <td valign="top"><img width="300" height="300" src="https://github.com/btahir/next-shopify-starter/blob/main/public/images/mobile-lighthouse.png"/></td>
-  </tr>
-  </tbody>
-</table>
-
-## Mobile Responsive
-
-<table align="center">
-  <thead>
-    <tr>
-      <td>Listings</td>
-      <td>Cart</td>
-    <tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td valign="top"><img width="300" height="300" src="https://github.com/btahir/next-shopify-starter/blob/main/public/images/responsive-main.gif"/></td>
-    <td valign="top"><img width="300" height="300" src="https://github.com/btahir/next-shopify-starter/blob/main/public/images/responsive-cart.gif"/></td>
-  </tr>
-  </tbody>
-</table>
-
-
-## The Tech
+## 使用スタック
 
 * Next.js + Tailwind CSS
 * GraphQL
-* localStorage to persist user session
+* ユーザーセッションを保存するlocalStorage
 * Shopify
-* Vercel
-* Font Awesome Icons
-* Josefin Sans Google Font
+* vercel
 
-## How to use
+## 使用方法
 
-By default, the store is set to query and show all products in one collection. 
-You can extend this to query multiple collections or your whole store.
+デフォルトでは、ストアは1つのコレクション内のすべての商品を照会して表示するように設定しています。複数のコレクションやストア全体を照会できます。
 
-#### A note on pagination in the GraphQL queries
+### GraphQL クエリでのページネーションについての注意点
 
-The graphQL queries are all hardcoded to pull the maximum number of products/variants/images which
-is set to 250 by Shopify. I did this to keep things simple. Pagination would have made the queries complicated
-and 250 items is enough for most use cases.
+すべてのGraphQL クエリは、Shopify で 250 に設定されている最大数の製品/バリエーション/画像を取得するようにハードコードしています。これは、ページネーションによりクエリを複雑にしないためです。ほとんどのユースケースで250は十分と考えられます。
 
-If you require pagination you will have to keep track of the [cursor](https://youtu.be/S37WsC8GzSA "graphql pagination") field and keep querying the data until you fetch all items.
+もし、ページネーションが必要な場合は、[cursor](https://youtu.be/S37WsC8GzSA "graphql pagination")フィールドを追跡し、すべてのアイテムを取得するまで問い合わせします。
 
-### Setup Environment variables
+### 環境変数の設定
 
-Create a .env.local file in the root directory. You need to add these 4 variables:
+ルートディレクトリに`.env.local`ファイルを作成します。以下の4つの変数を追加する必要があります。
 
 ```
 SHOPIFY_STORE_FRONT_ACCESS_TOKEN=
@@ -83,39 +33,36 @@ SHOPIFY_COLLECTION=
 NEXT_PUBLIC_LOCAL_STORAGE_NAME=
 ```
 
-The SHOPIFY_STORE_FRONT_ACCESS_TOKEN and SHOPIFY_STORE_DOMAIN (it will be something like DOMAIN_NAME.myshopify.com) are needed to access
-the Shopify Storefront API (make sure you have set it up in your Shopify store. See [docs](https://shopify.dev/docs/storefront-api/getting-started "Shopify store")) for more information.
+`SHOPIFY_STORE_FRONT_ACCESS_TOKEN`と`SHOPIFY_STORE_DOMAIN`（DOMAIN_NAME.myshopify.comのようになります）は、Shopify Storefront APIのアクセスに必要です。ShopifyストアでAPIが利用できるように設定されていることを確認してください。詳しくは[docs](https://shopify.dev/docs/storefront-api/getting-started "Shopify store")をご覧ください。
 
-SHOPIFY_COLLECTION is the name of the collection you want to pull in and NEXT_PUBLIC_LOCAL_STORAGE_NAME is the name of the key
-your users will store their cart information under. The exact name isn't that important although I suggest you make it unique so
-it is less likely to clash with other stored objects. Something like yourStoreNameShopifyStore where yourStoreName is your shopify store name will suffice.
+`SHOPIFY_COLLECTION`は取り込みたいコレクションの名前です。`NEXT_PUBLIC_LOCAL_STORAGE_NAME`は、ユーザーがカート情報を保存するためのキーの名前です。正確な名前はそれほど重要でありませんが、ユニークな名前にすることをお勧めします。他の保存されたオブジェクトと衝突する可能性が低くなります。「yourStoreNameShopifyStore」のように、「yourStoreName」があなたのshopifyストア名であれば十分です。
 
-### Installation
+### インストール
 
-Change into the project directory and run the following command:
+プロジェクトのディレクトリーに移動し、以下のコマンドを実行します。
 
 ```
 yarn && yarn dev
 ```
 
-### Update Site Metadata
+### サイトのメタデータの更新
 
-You can update your site metadata in the next.config.js file. 
+サイトのメタデータは、next.config.jsファイルで更新できます。
 
 ```
 env: {
-  siteTitle: 'Your Company',
-  siteDescription: 'Your company description.',
-  siteKeywords: 'your company keywords',
+  siteTitle: 'あなたの会社',
+  siteDescription: 'あなたの会社の説明です',
+  siteKeywords:'あなたの会社のキーワード',
   siteUrl: 'https://doggystickers.xyz',
   siteImagePreviewUrl: '/images/main.jpg',
   twitterHandle: '@your_handle'
-} 
+}
 ```
 
-### Update Colors
+### 色の更新
 
-You can update the color palette in tailwind.config.js file.
+カラーパレットの更新はtailwind.config.jsファイルで行います。
 
 ```
 colors: {
@@ -127,28 +74,23 @@ colors: {
   },
 },
 ```
-### Update Progressive Web App (PWA) data
 
-Update the manifest.json file and the icons under the public/images/icons folder.
+### プログレッシブ・ウェブ・アプリ（PWA）データの更新
 
-You can use free tools online such as https://realfavicongenerator.net/ to quickly generate all the different icon sizes and favicon.ico file.
+`manifest.json`ファイルと、`public/images/icons`ディレクトリー配下のアイコンを更新します。
+https://realfavicongenerator.net/ などのオンラインの無料ツールを使用すると、すべての異なるアイコンサイズと favicon.ico ファイルをすばやく生成できます。
 
-### Deployment
+## デプロイ
 
-You can deploy this using any number of services. Vercel and Netlify are the ones I prefer and very easy to setup and sync with your Github repo.
+様々なサービスを使ってデプロイできます。本サイトでは、Vercel をしています。セットアップや Github リポジトリーとの同期が非常に簡単です。
 
-### Credit
 
-The store was inspired by the awesome [Gatsby Swag Store](https://github.com/gatsbyjs/store.gatsbyjs.org "gatsby store") as well
-as countless other devs much more capable than me who put out their awesome work for free. 
+## ライセンス
 
-### License
+オリジナルのコードと同様にMTIライセンスを採用しています。
 
-I have open sourced this code under the MIT License in the hope that if this helps people navigate their way around JAMStack eCommerce stores
-as the Gatsby Swag Store did for me when I first started out.
+https://github.com/GraphCMS/graphcms-commerce-starter
 
-### Buy Me Coffee! :coffee:
+## 注意事項
 
-If you did find this useful and want to show your appreciation you can buy me a [coffee](https://www.buymeacoffee.com/neum "coffee") :smiley:
-
-You can also buy some Doggy Stickers from the [store](https://doggystickers.xyz/ "store")! :dog:
+コード自体のローカライズはWIPです。また、準備でき次第公開して参ります。
