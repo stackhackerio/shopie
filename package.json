@@ -13,7 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@tailwindcss/forms": "^0.3.3",
-    "autoprefixer": "^10.0.4",
+    "autoprefixer": "^10.4.1",
     "next": "latest",
     "next-pwa": "^5.2.21",
     "postcss": "^8.3.5",
